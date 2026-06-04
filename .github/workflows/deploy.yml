@@ -15,7 +15,7 @@ on:
 # Variables used across the workflow
 env:
   AWS_REGION: ${{ secrets.AWS_REGION }}
-  S3_BUCKET: elasticbeanstalk-eu-west-1-842676015206          # ← REPLACE with your bucket name
+  S3_BUCKET: elasticbeanstalk-eu-west-1-842676015206
   EB_APPLICATION: beanstalk-lab
   EB_ENVIRONMENT: beanstalk-lab-env
 

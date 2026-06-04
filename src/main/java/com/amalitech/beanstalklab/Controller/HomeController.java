@@ -14,12 +14,12 @@ import java.util.Map;
 @RestController
 public class HomeController {
     // Bump this version number every time we deploy to verify CI/CD
-    private static final String APP_VERSION = "1.0.0";
+    private static final String APP_VERSION = "1.0.1";
 
     @GetMapping("/")
     public Map<String, String> home() {
         Map<String, String> response = new LinkedHashMap<>();
-        response.put("message", "Hello from Elastic Beanstalk!");
+response.put("message", "Hello from Elastic Beanstalk - auto-deployed!");
         response.put("version", APP_VERSION);
         response.put("status", "deployment successful");
         return response;

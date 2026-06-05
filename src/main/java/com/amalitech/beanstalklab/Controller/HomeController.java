@@ -13,7 +13,7 @@ import java.util.Map;
  */
 @RestController
 public class HomeController {
-    private static final String APP_VERSION = "2.0.0"; //after adding dynamo db
+    private static final String APP_VERSION = "5.0.0"; //after adding dynamo db
 
     @GetMapping("/")
     public Map<String, String> home() {

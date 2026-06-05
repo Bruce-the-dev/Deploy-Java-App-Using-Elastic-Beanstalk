@@ -11,13 +11,16 @@ on:
   push:
     branches:
       - main
-
+# Required for OIDC: lets the workflow request an ID token from GitHub
+permissions:
+  id-token: write    # Required to fetch the OIDC token
+  contents: read     # Required for actions/checkout
 # Variables used across the workflow
 env:
-  AWS_REGION: ${{ secrets.AWS_REGION }}
-  S3_BUCKET: elasticbeanstalk-eu-west-1-842676015206
-  EB_APPLICATION: beanstalk-lab
-  EB_ENVIRONMENT: beanstalk-lab-env
+  AWS_REGION: ${{ vars.AWS_REGION }}
+  S3_BUCKET: ${{ vars.S3_BUCKET }}
+  EB_APPLICATION: ${{ vars.EB_APPLICATION }}
+  EB_ENVIRONMENT: ${{ vars.EB_ENVIRONMENT }}
 
 jobs:
   deploy:
@@ -79,11 +82,10 @@ jobs:
       # ------------------------------------------------------------
       # 7. Configure AWS credentials from GitHub secrets
       # ------------------------------------------------------------
-      - name: Configure AWS credentials
+      - name: Configure AWS credentials (Via OIDC)
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: ${{ env.AWS_REGION }}
 
       # ------------------------------------------------------------
